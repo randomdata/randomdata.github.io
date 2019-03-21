@@ -9,91 +9,22 @@
 		<title>Randomdata</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
 	</head>
 	<body class="is-preload">
 
 		<!-- Header -->
 			<header id="header">
 				<div class="inner">
-					<a href="#" class="image avatar"><img src="images/randomdata-logo.jpg" alt="" /></a>
-					<h1>The <strong><a href="#">Randomdata</a></strong>, hackerspace<br/>in Utrecht the Netherlands<br />
+					<a href="#" class="image avatar"><img src="/images/randomdata-logo.jpg" alt="" /></a>
+					<h1>The <strong><a href="/">Randomdata</a></strong>, hackerspace<br/>in Utrecht the Netherlands<br />
 				</div>
 			</header>
 
 		<!-- Main -->
 			<div id="main">
-
-				<!-- One -->
-					<section id="one">
-						<header class="major">
-							<h2>What is Randomdata?</h2>
-						</header>
-						<p>Randomdata is group of people who want to do "technical" stuff. Randomdata is a hackerspace. A hackerspace is a real (as opposed to virtual) place where people with common interests, usually in science, technology, or digital or electronic art can meet, socialize and collaborate. A hackerspace can be viewed as an open community lab, workbench, machine shop, workshop and/or studio where people of diverse backgrounds can come together to share resources and knowledge to build/make things. We build, we break, we create, we invent and of course we hack. There are no actual limits to creativity (unless it's illegal ;)).</p>
-						<div class="col-6 col-12-small">
-              <ul class="actions fit">
-						  	<li><a href="https://randomdata.nl/" class="button fit">Wiki</a></li>
-						  	<li><a href="http://space.randomdata.nl/space.png" class="button fit">Spacecam</a></li>
-						  	<li><a href="http://heat.space.randomdata.nl/?HEAT=1" class="button fit">Heating</a></li>
-						  </ul>
-            </div>
-					</section>
-          
-				<!-- Two -->
-					<section id="four">
-						<h2>Blog</h2>
-						<div class="row">
-
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="html/hack-nl-2019/" class="image fit"><img src="images/thumbs/opendag-logo.png" alt="" /></a>
-								<h3>Open Hackerspaces 2019</h3>
-								<p>Randomdata doet mee aan de <a href="https://hackerspaces.nl/open-dag/">hackerspaces.nl</a> open dag voor hackerspaces.</p>
-							</article>
-
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="html/blog/" class="image fit"><img src="images/thumbs/opendag-logo.png" alt="" /></a>
-								<h3>Randomdata's new blog</h3>
-								<p>We resurrected our blog page, but with modern tech.</p>
-							</article>
-
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="html/ctf-fridays/" class="image fit"><img src="images/thumbs/opendag-logo.png" alt="" /></a>
-								<h3>CTF friday's are back</h3>
-								<p>Waste vast amounts of time playing CTF's at Randomdata.</p>
-							</article>
-
-              <article class="col-6 col-12-xsmall work-item">
-								<a href="html/meetup/" class="image fit "><img src="images/thumbs/meetup-logo.png" alt="" /></a>
-								<h3>Started with Meetup</h3>
-								<p>We have a meetup page now.</p>
-							</article>
-
-						</div>
-					</section>
-
-				<!-- Three -->
-					<section id="three">
-						<h2>Pay us a visit</h2>
-						<p>Every Tuesday we have a open meeting, starts around 19:00 local time. Everybody is welcome. And no, we will not hack the Facebook account of your ex boy/girlfriend.</p>
-						<div class="row">
-							<div class="col-12 col-12-small">
-								<ul class="labeled-icons">
-									<li>
-										<h3 class="icon fa-home"><span class="label">Address</span></h3>
-										Parkstraat 40<br />
-										Utrecht<br />
-										The Netherlands<br />
-                    <em>Take a look on <a href="https://randomdata.nl/index.php?title=Main_Page#The_space_location">the wiki</a> for more guidance</em>
-									</li>
-									<li>
-										<h3 class="icon fa-envelope-o"><span class="label">Email</span></h3>
-										<a href="">info [at] randomdata [.] nl</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</section>
-
+        <div w3-include-html="content.html"></div>
+      </div>    
 
 		<!-- Footer -->
 			<footer id="footer">
@@ -115,12 +46,14 @@
 			</footer>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.poptrox.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.poptrox.min.js"></script>
+			<script src="/assets/js/browser.min.js"></script>
+			<script src="/assets/js/breakpoints.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<script src="/assets/js/main.js"></script>
+      <script src="/assets/js/includer.js"></script>
+      <script>includeHTML();</script>
 
 	</body>
 </html>
