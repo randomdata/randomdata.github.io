@@ -1,3 +1,5 @@
+var HeatPre = "[*] heat-addon >> ";
+
 var getPublicIP = new Promise(function(resolve, reject){
   var url = "https://icanhazip.com";
   $.ajax({
@@ -6,7 +8,7 @@ var getPublicIP = new Promise(function(resolve, reject){
       resolve(String($.trim(result)));
     },
     error:function(data){
-      reject("error in retrieving own ip");
+      reject(HeatPre + "Error in retrieving own ip");
     }
   });
 });
@@ -29,7 +31,7 @@ var getSpaceIP = new Promise(function(resolve, reject){
       resolve(String($.trim(data["Answer"][0]["data"])));
     },
     error:function(data){
-      reject("error in retrieving Space IP");
+      reject(HeatPre + "Error in retrieving Space IP");
     }    
   });
 });
@@ -38,35 +40,28 @@ $(document).ready(function(){
   var addresses = {};
 
   getPublicIP.then(function(result) {
-    console.log("Function completed succesfully, ip is: ", JSON.stringify(result))
+    console.log(HeatPre + "Function completed succesfully, ip is: ", JSON.stringify(result))
     addresses.pub = result;
     $("#myip").html(result);
   });
 
   getSpaceIP.then(function(result) {
-    console.log("function completed succesfully, space ip is:", JSON.stringify(result))
+    console.log(HeatPre + "Function completed succesfully, space ip is:", JSON.stringify(result))
     addresses.space = result;
     $("#dns").html(result);
   })
 
   Promise.all([getPublicIP,getSpaceIP]).then(function(values) {
     if(addresses.space == addresses.pub) {
-      console.log('Public IP is the same as space IP');
-      console.log('pub ip:', addresses.pub, 'space ip', addresses.space);
+      console.log(HeatPre + 'Public IP is the same as space IP');
       // Add code to ping Heat server.
       /* TODO */
       // Add heating button.
       $('#topMenu').append("<li><a href='http://heat.space.randomdata.nl/?HEAT=1' class='button fit'>Heating</a></li>")
     } else {
-      console.log('You are not in the space, or something went wrong.');
+      console.log(HeatPre + 'You are not in the space, or something went wrong.');
     };
   });
-
-  if('x' == 'x') {
-    console.log('show heating button');
-    var buttonHtml = '<li><a href="http://heat.space.randomdata.nl/?HEAT=1" >Heating</a></li>';
-    $("#button-heat").html(buttonHtml);
-  }
 
 });
 
@@ -76,13 +71,13 @@ $(document).ready(function(){
 * source: https://gist.github.com/jerone/3487795
 ***************************************************/
 
-$(document).ready(function(){
-  $.Ping("http://heat.space.randomdata.nl", 1000).done(function (success, url, time, on) {
-    console.log("ping done", arguments);
-  }).fail(function (failure, url, time, on) {
-    console.log("ping fail", arguments)
-  });
-});
+//$(document).ready(function(){
+//  $.Ping("http://heat.space.randomdata.nl", 1000).done(function (success, url, time, on) {
+//    console.log("ping done", arguments);
+//  }).fail(function (failure, url, time, on) {
+//    console.log("ping fail", arguments)
+//  });
+//});
 
 /* Extending Ping */
 $.extend($, {
