@@ -1,17 +1,17 @@
-function getPublicIP(callback){
+var getPublicIP = new Promise(function(resolve, reject){
   var url = "https://icanhazip.com";
   $.ajax({
     url: url, 
     success: function(result){
-      callback(String($.trim(result)));
+      resolve(String($.trim(result)));
     },
     error:function(data){
-      console.log("error");
+      reject("error in retrieving own ip");
     }
   });
-}
+});
 
-function getSpaceIP(callback){
+var getSpaceIP = new Promise(function(resolve, reject){
   var url = "https://cloudflare-dns.com/dns-query";
   var query = "space.randomdata.nl"
   var queryType = 'A'
@@ -21,50 +21,41 @@ function getSpaceIP(callback){
     data: { name: query, type: queryType },
     beforeSend: function(xhr){xhr.setRequestHeader('accept', 'application/dns-json');},
     success:function(data){
-      console.log("success");
-      /* console.log(data) */
-      callback(String($.trim(data["Answer"][0]["data"])));
+      resolve(String($.trim(data["Answer"][0]["data"])));
     },
     error:function(data){
-      console.log("error");
+      reject("error in retrieving Space IP");
     }    
   });
-}
-
-function getData(callback){
-  return [ getPublicIP(func), getSpaceIP(func)]
-}
-
-$(document).ready(function(){
- console.log("READY")
 });
 
 $(document).ready(function(){
-  let array = {};
-  let pub = (function(){
-    getPublicIP(function(returnvalue){
-      /* console.log(returnvalue); */
-      $("#myip").html(returnvalue);
-      /* array.pub = returnvalue; */
-      return returnvalue
-    });
+  var addresses = {};
+
+  getPublicIP.then(function(result) {
+    console.log("Function completed succesfully, ip is: ", JSON.stringify(result))
+    addresses.public = result;
+    $("#myip").html(result);
   });
 
-  getSpaceIP(function(returnvalue){
-    /* console.log(returnvalue); */
-    array.space = returnvalue;
-    $("#dns").html(returnvalue);
+  getSpaceIP.then(function(result) {
+    console.log("function completed succesfully, space ip is:", JSON.stringify(result))
+    addresses.space = result;
+    $("#dns").html(result);
+  })
+
+  Promise.all([getPublicIP,getSpaceIP]).then(function(values) {
+    if(addresses.space == addresses.public) {
+      console.log('Public IP is the same as space IP');
+      console.log('pub ip:', array.public, 'space ip', array.space);
+      //Add code to ping Heat server
+      //Add code to show Heat button
+    } else {
+      console.log('ips are different');
+      //Add code to hide Heat button
+    };
   });
 
-  /* TODO Stuck at the following code */
-  console.log(array);
-  var str = Object.keys(array);
-  console.log('pub ip:', array["pub"], 'space ip', array.space, 'values:', str);
-  console.log('pub ip:', $(pub), 'space ip', '');
-
-  if(array["pub"] == array["space"]) {
-    console.log('Public IP is the same as space IP');
-  }
 });
 
 /*
@@ -100,9 +91,6 @@ $(document).ready(function() {
         }
     });
 });
-*/
-
-
 
 /************************
 Ping over AJAX hack
