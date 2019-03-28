@@ -1,6 +1,3 @@
-var PUBLIC_IP;
-var SPACE_IP;
-
 function getPublicIP(callback){
   var url = "https://icanhazip.com";
   $.ajax({
@@ -43,11 +40,14 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-  var array = {};
-  getPublicIP(function(returnvalue){
-    /* console.log(returnvalue); */
-    array.pub = returnvalue;
-    $("#myip").html(returnvalue);
+  let array = {};
+  let pub = (function(){
+    getPublicIP(function(returnvalue){
+      /* console.log(returnvalue); */
+      $("#myip").html(returnvalue);
+      /* array.pub = returnvalue; */
+      return returnvalue
+    });
   });
 
   getSpaceIP(function(returnvalue){
@@ -59,9 +59,10 @@ $(document).ready(function(){
   /* TODO Stuck at the following code */
   console.log(array);
   var str = Object.keys(array);
-  console.log('pub ip:', array.pub, 'space ip', array.space, 'array:', array, 'values:', str);
+  console.log('pub ip:', array["pub"], 'space ip', array.space, 'values:', str);
+  console.log('pub ip:', $(pub), 'space ip', '');
 
-  if(array["publicIP"] == array["spaceIP"]) {
+  if(array["pub"] == array["space"]) {
     console.log('Public IP is the same as space IP');
   }
 });
