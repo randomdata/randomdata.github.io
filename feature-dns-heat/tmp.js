@@ -34,7 +34,7 @@ $(document).ready(function(){
 
   getPublicIP.then(function(result) {
     console.log("Function completed succesfully, ip is: ", JSON.stringify(result))
-    addresses.public = result;
+    addresses.pub = result;
     $("#myip").html(result);
   });
 
@@ -45,15 +45,15 @@ $(document).ready(function(){
   })
 
   Promise.all([getPublicIP,getSpaceIP]).then(function(values) {
-    if(addresses.space == addresses.public) {
+    if(addresses.space == addresses.pub ) {
       console.log('Public IP is the same as space IP');
-      console.log('pub ip:', array.public, 'space ip', array.space);
-      //Add code to ping Heat server
-         $('#topMenu').append("<li><a href='http://heat.space.randomdata.nl/?HEAT=1' class='button fit'>Heating</a></li>")
+      console.log('pub ip:', addresses.pub, 'space ip', addresses.space);
+      // Add code to ping Heat server.
+      /* TODO */
+      // Add heating button.
+      $('#topMenu').append("<li><a href='http://heat.space.randomdata.nl/?HEAT=1' class='button fit'>Heating</a></li>")
     } else {
       console.log('You are not in the space, or something went wrong.');
-      // Leaving this line for testing and show working; remove before merging to master:
-      // $('#topMenu').append(" <li><a class='button fit'>There is no heat</a></li>")
     };
   });
 
