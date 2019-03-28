@@ -50,15 +50,15 @@ $(document).ready(function(){
   })
 
   Promise.all([getPublicIP,getSpaceIP]).then(function(values) {
-
-    console.log('pub ip:', addresses.pub, 'space ip', addresses.space, 'array:', addresses);
-    if(addresses.space == addresses.pub) {
+    if(addresses.space == addresses.pub ) {
       console.log('Public IP is the same as space IP');
-      //Add code to ping Heat server
-      //Add code to show Heat button
+      console.log('pub ip:', addresses.pub, 'space ip', addresses.space);
+      // Add code to ping Heat server.
+      /* TODO */
+      // Add heating button.
+      $('#topMenu').append("<li><a href='http://heat.space.randomdata.nl/?HEAT=1' class='button fit'>Heating</a></li>")
     } else {
-      console.log('ips are different');
-      //Add code to hide Heat button
+      console.log('You are not in the space, or something went wrong.');
     };
   });
 
@@ -70,27 +70,11 @@ $(document).ready(function(){
 
 });
 
-/*
-$(document).ready(function() {
-    var data = {message: 'space.randomdata.nl'}
-    $.ajax({
-        url: 'https://cloudflare-dns.com/dns-query?name=space.randomdata.nl&type=A',
-        type: 'GET',
-        beforeSend: function(xhr){xhr.setRequestHeader('accept', 'application/dns-json');},
-        success:function(data){
-          console.log("success");
-          PUBLIC_IP = ["Answer"][0]["data"];
-          $("#dns").html(data["Answer"][0]["data"]);
-        },
-        error: function(){
-          console.log("error");        
-        }
-    });
-});
 
-/************************
-Ping over AJAX hack
-************************/
+/**************************************************
+* Ping over AJAX hack
+* source: https://gist.github.com/jerone/3487795
+***************************************************/
 
 $(document).ready(function(){
   $.Ping("http://heat.space.randomdata.nl", 1000).done(function (success, url, time, on) {
@@ -133,4 +117,5 @@ $.extend($, {
 
   }).promise();
  }
+ 
 });
