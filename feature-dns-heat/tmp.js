@@ -11,6 +11,11 @@ var getPublicIP = new Promise(function(resolve, reject){
   });
 });
 
+/*
+https://developers.cloudflare.com/1.1.1.1/dns-over-https/json-format/
+https://cloudflare-dns.com/dns-query?name=space.randomdata.nl&type=A
+https://exana.io/tools/dns/space.randomdata.nl/a
+*/
 var getSpaceIP = new Promise(function(resolve, reject){
   var url = "https://cloudflare-dns.com/dns-query";
   var query = "space.randomdata.nl"
@@ -34,7 +39,7 @@ $(document).ready(function(){
 
   getPublicIP.then(function(result) {
     console.log("Function completed succesfully, ip is: ", JSON.stringify(result))
-    addresses.public = result;
+    addresses.pub = result;
     $("#myip").html(result);
   });
 
@@ -45,9 +50,10 @@ $(document).ready(function(){
   })
 
   Promise.all([getPublicIP,getSpaceIP]).then(function(values) {
-    if(addresses.space == addresses.public) {
+
+    console.log('pub ip:', addresses.pub, 'space ip', addresses.space, 'array:', addresses);
+    if(addresses.space == addresses.pub) {
       console.log('Public IP is the same as space IP');
-      console.log('pub ip:', array.public, 'space ip', array.space);
       //Add code to ping Heat server
       //Add code to show Heat button
     } else {
@@ -56,23 +62,13 @@ $(document).ready(function(){
     };
   });
 
-});
+  if('x' == 'x') {
+    console.log('show heating button');
+    var buttonHtml = '<li><a href="http://heat.space.randomdata.nl/?HEAT=1" >Heating</a></li>';
+    $("#button-heat").html(buttonHtml);
+  }
 
-/*
-$(document).ready(function(){
- $.ajax({
-     url: "https://icanhazip.com", success: function(result){
-      SPACE_IP = result;
-      $("#myip").html(result);
-  }});
 });
-*/
-
-/*
-https://developers.cloudflare.com/1.1.1.1/dns-over-https/json-format/
-https://cloudflare-dns.com/dns-query?name=space.randomdata.nl&type=A
-https://exana.io/tools/dns/space.randomdata.nl/a
-*/
 
 /*
 $(document).ready(function() {
