@@ -46,13 +46,15 @@ $(document).ready(function(){
     if(addresses.space == addresses.public) {
       console.log('Public IP is the same as space IP');
       //Add code to ping Heat server
-      //Add code to show Heat button
+         $('#topMenu').append("<li><a href='http://heat.space.randomdata.nl/?HEAT=1' class='button fit'>Heating</a></li>")
     } else {
-      console.log('ips are different');
-      //Add code to hide Heat button
+      console.log('You are not in the space, or something went wrong.');
+      // Leaving this line for testing and show working; remove before merging to master:
+      // $('#topMenu').append(" <li><a class='button fit'>There is no heat</a></li>")
     };
   });
 });
+
 
 /************************
 Ping over AJAX hack
@@ -99,4 +101,5 @@ $.extend($, {
 
   }).promise();
  }
+ 
 });
