@@ -1,53 +1,38 @@
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="tmp.js"></script>
-<script>
-$.extend($, {
- Ping: function Ping(url, timeout) {
-  timeout = timeout || 1500;
-  var timer = null;
-
-  return $.Deferred(function deferred(defer) {
-
-   var img = new Image();
-   img.onload = function () { success("onload"); };
-   img.onerror = function () { success("onerror"); };  // onerror is also success, because this means the domain/ip is found, only the image not;
-
-   var start = new Date();
-   img.src = url += ("?cache=" + +start);
-   timer = window.setTimeout(function timer() { fail(); }, timeout);
-
-   function cleanup() {
-    window.clearTimeout(timer);
-    timer = img = null;
-   }
-
-   function success(on) {
-    cleanup();
-    defer.resolve(true, url, new Date() - start, on);
-   }
-
-   function fail() {
-    cleanup();
-    defer.reject(false, url, new Date() - start, "timeout");
-   }
-
-  }).promise();
- }
-});
-
-$.Ping("http://randomdata.nl" /*, optional timeout */).done(function (success, url, time, on) {
- console.log("ping done", arguments);
-}).fail(function (failure, url, time, on) {
- console.log("ping fail", arguments);
-});
-</script>
+  <title>DNS test</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="tmp.js"></script>
 </head>
 <body>
 
-<h2>My IP, from icanhazip.com</h2>
-<div id="myip"><p>ip</p></div>
+<div id="main">
+  <section id="one">
+    <div class="col-6 col-12-small">
+      <ul class="actions fit">
+        <li><a href="https://wiki.randomdata.nl/" class="button fit">Wiki</a></li>
+        <li><a href="https://wiki.randomdata.nl/index.php?title=Main_Page#The_space_location" class="button fit">Location</a></li>
+        <li><a href="http://heat.space.randomdata.nl/?HEAT=1" class="button fit">Heating</a></li>
+    </ul>
+    </div>
+  </section>
+</div>
+
+<h2>My IP, from icanhazip.com: <div id="myip" /></h2>
+
+<h2>DNS lookup, Cloudflare - DNS over HTTPS: <div id="dns" /></h2>
+
+
+<div type="hidden" id="publicDNS" value=""></div>
+<div type="hidden" id="spaceDNS" value=""></div>
+
+
+
+<div id="check" ></div>
+
+
 
 </body>
 </html>
