@@ -50,7 +50,7 @@ $(document).ready(function(){
   })
 
   Promise.all([getPublicIP,getSpaceIP]).then(function(values) {
-    if(addresses.space == addresses.pub ) {
+    if(addresses.space == addresses.pub) {
       console.log('Public IP is the same as space IP');
       console.log('pub ip:', addresses.pub, 'space ip', addresses.space);
       // Add code to ping Heat server.
