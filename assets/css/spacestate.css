@@ -1,14 +1,17 @@
 .button.open {
     border-color: #2ac81c;
+    background-color: #72ff65; !important;
 }
 .button.open:hover {
-    color: #2ac81c !important
+    color: #209b15 !important
 }
 .button.closed {
     border-color: #c82a1c;
+    background-color: #f8786c !important;
+    color: white !important;
 }
 .button.closed:hover {
-    color: #c82a1c !important
+    color: #c82a1c !important;    
 }
 
 /* The Modal (background) */
