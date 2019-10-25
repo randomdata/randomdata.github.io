@@ -29,8 +29,7 @@ $(function(){
     setInterval(update,5000);
 });
 
-
-window.onload = function(){
+function setModal(){
     var IncludePre = "[*] spacestate-addon >> ";
     // Get the modal
     var modal = document.getElementById("state-modal");
@@ -58,9 +57,22 @@ window.onload = function(){
         }
     }
 }
-document.addEventListener('readystatechange', () => console.log('readyState:' + document.readyState));
 
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("[*] SPACESTATE: DOM loaded")
-    console.log("[*] SPACESTATE: " + document.readyState)
-})
+const callback = function(mutationlist, observer){
+    // For all changes on DOM
+    for (let mutation of mutationlist){
+        // If mutation has a noticable list of added nodes
+        if (mutation.type === 'childList' && mutation.addedNodes.length > 1 ){
+            // loop over all nodes to get the id="one" section
+            for (let el of mutation.addedNodes){
+                if (el.id === "one"){
+                    setModal();
+                }                
+            }
+        }
+    }
+}
+
+MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+const observer = new MutationObserver(callback);
+observer.observe(document, {subtree: true, childList: true});
