@@ -63,7 +63,7 @@
 .modal-header {
   padding: 2px;
   height: 100%;
-  background-color: #5cb85c;
+  background-color: #20a620;
   color: white;
   text-align: center;  
 }
@@ -73,7 +73,7 @@
 
 .modal-footer {
   padding: 2px 16px;
-  background-color: #5cb85c;
+  background-color: #20a620;
   color: white;
   height: 10px;
 }
