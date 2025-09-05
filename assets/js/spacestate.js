@@ -32,8 +32,6 @@ function setStatus(open, lastUpdate) {
 }
 
 function mainLoop() {
-    console.log("calling mainloop");
-
     fetch("https://randomdata.sandervankasteel.nl/index.json")
         .then(response => response.json())
         .then(function(data) {
