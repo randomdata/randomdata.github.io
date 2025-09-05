@@ -2593,6 +2593,9 @@ input, select, textarea {
 			-ms-flex-grow: 1;
 			flex-grow: 1;
 			margin: 0 0 2em 0;
+			display: flex;
+			flex-direction: column;
+			align-items: end;
 		}
 
 		#header strong, #header b {
@@ -3179,3 +3182,47 @@ input, select, textarea {
 			}
 
 	}
+
+.space-state-wrapper {
+	width: 100%;
+	display: inline-flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	align-items: end;
+
+	.space-state {
+		margin-top: 2rem;
+		width: 100%;
+		background: oklch(70.4% 0.04 256.788);
+		border-radius: 8px;
+		color: white;
+		height: 4rem;
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.space-state-open {
+		background: oklch(72.3% 0.219 149.579);
+		box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+	}
+
+	.space-state-closed {
+		background: oklch(63.7% 0.237 25.331);
+		box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+	}
+
+	.space-state-last-update {
+		font-size: 1.25rem;
+		font-style: italic;
+		font-weight: 400;
+	}
+}
+
+@media screen and (min-width: 480px) {
+	.space-state-wrapper {
+		.space-state {
+			width: 75%;
+		}
+	}
+}
