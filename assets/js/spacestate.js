@@ -42,7 +42,7 @@ function mainLoop() {
 }
 
 document.addEventListener("DOMContentLoaded", function(e) {
-    setTimeout(() => {
+    setInterval(() => {
         mainLoop();
     }, 120000); // Check every 120 seconds / 2 minutes.
 
