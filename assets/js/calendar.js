@@ -1,26 +1,43 @@
 document.addEventListener("DOMContentLoaded", function(e) {
     let isIntialized = false;
-    var calendarEl;
-
     const interval = setInterval(() => {
         const queriedElement = document.querySelector('#calendar');
-
         isIntialized = !!queriedElement;
-        calendarEl = queriedElement;
 
         if(isIntialized) {
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
+            // Use listWeek when mobile
+            const headerConfig = {
+                start: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+                center: 'title',
+                end: 'prev,next'
+            };
+
+            new FullCalendar.Calendar(queriedElement, {
+                locale: 'en',
+                headerToolbar: {
+                    ...headerConfig,
+                },
+                initialView: 'listWeek',
                 events: {
-                    url: 'https://www.meetup.com/Randomdata/events/ical/',
+                    url: 'https://randomdata.sandervankasteel.nl/events.ical',
                     format: 'ics'
-                  }
-              });
-            calendar.render();
+                },
+                eventClick: function(info) {
+                    info.jsEvent.preventDefault();
+                    if(info.event.url) {
+                        window.open(info.event.url, "_blank")
+                    }
+                },
+                eventColor: '#378006',
+                eventTimeFormat: {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: false,
+                }
+              }).render();
+
+            clearInterval(interval);
         }
     }, 500);
-
-    if(isIntialized) {
-        clearInterval(interval);
-    }
 });
