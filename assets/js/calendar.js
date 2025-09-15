@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
             new FullCalendar.Calendar(queriedElement, {
                 locale: 'en',
+                firstDay: 1,
                 headerToolbar: {
                     ...headerConfig,
                 },
