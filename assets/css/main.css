@@ -3026,13 +3026,17 @@ input, select, textarea {
 				display: block;
 			}
 
-				#header h1 {
-					font-size: 1.75em;
-				}
+			#header > .inner {
+				align-items: center;
+			}
 
-					#header h1 br {
-						display: inline;
-					}
+			#header h1 {
+				font-size: 1.75em;
+			}
+
+			#header h1 br {
+				display: inline;
+			}
 
 		/* Footer */
 
